@@ -4,7 +4,6 @@ import nl.novi.techiteasy1121.dto.TelevisionDto;
 import nl.novi.techiteasy1121.exceptions.RecordNotFoundException;
 import nl.novi.techiteasy1121.models.Television;
 import nl.novi.techiteasy1121.repositories.TelevisionRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -114,36 +113,37 @@ public class TelevisionServiceImpl implements TelevisionService {
     @Override
     public void deleteTelevisionById( Long id ) {
 
-                repository.deleteById( id );
+        repository.deleteById( id );
 
     }
-        @Override
-        public TelevisionDto updateTelevision ( Long id, TelevisionDto dto){
-            if ( repository.findById( id ).isPresent() ) {
 
-                Television tv = repository.findById( id ).get();
+    @Override
+    public TelevisionDto updateTelevision( Long id, TelevisionDto dto ) {
+        if ( repository.findById( id ).isPresent() ) {
 
-                tv.setId( tv.getId() );
-                tv.setType( dto.getType() );
-                tv.setBrand( dto.getBrand() );
-                tv.setName( dto.getName() );
-                tv.setPrice( dto.getPrice() );
-                tv.setAvailableSize( dto.getAvailableSize() );
-                tv.setRefreshRate( dto.getRefreshRate() );
-                tv.setScreenType( dto.getScreenType() );
-                tv.setScreenQuality( dto.getScreenQuality() );
-                tv.setSmartTv( dto.getSmartTv() );
-                tv.setWifi( dto.getWifi() );
-                tv.setVoiceControl( dto.getVoiceControl() );
-                tv.setHdr( dto.getHdr() );
-                tv.setBluetooth( dto.getBluetooth() );
-                tv.setAmbiLight( dto.getAmbiLight() );
-                tv.setOriginalStock( dto.getOriginalStock() );
-                tv.setSold( dto.getSold() );
-                repository.save( tv );
-                return dto;
-            } else {
-                throw new RecordNotFoundException( "geen televisie gevonden" );
-            }
+            Television tv = repository.findById( id ).get();
+
+            tv.setId( tv.getId() );
+            tv.setType( dto.getType() );
+            tv.setBrand( dto.getBrand() );
+            tv.setName( dto.getName() );
+            tv.setPrice( dto.getPrice() );
+            tv.setAvailableSize( dto.getAvailableSize() );
+            tv.setRefreshRate( dto.getRefreshRate() );
+            tv.setScreenType( dto.getScreenType() );
+            tv.setScreenQuality( dto.getScreenQuality() );
+            tv.setSmartTv( dto.getSmartTv() );
+            tv.setWifi( dto.getWifi() );
+            tv.setVoiceControl( dto.getVoiceControl() );
+            tv.setHdr( dto.getHdr() );
+            tv.setBluetooth( dto.getBluetooth() );
+            tv.setAmbiLight( dto.getAmbiLight() );
+            tv.setOriginalStock( dto.getOriginalStock() );
+            tv.setSold( dto.getSold() );
+            repository.save( tv );
+            return dto;
+        } else {
+            throw new RecordNotFoundException( "geen televisie gevonden" );
         }
     }
+}

@@ -2,10 +2,7 @@ package nl.novi.techiteasy1121.controllers;
 
 import nl.novi.techiteasy1121.dto.TelevisionDto;
 import nl.novi.techiteasy1121.exceptions.RecordNotFoundException;
-import nl.novi.techiteasy1121.models.Television;
-import nl.novi.techiteasy1121.repositories.TelevisionRepository;
 import nl.novi.techiteasy1121.service.TelevisionService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -19,7 +16,6 @@ import java.util.List;
 public class TelevisionController {
 
     private final TelevisionService service;
-
     public TelevisionController( TelevisionService service ) {
         this.service = service;
     }

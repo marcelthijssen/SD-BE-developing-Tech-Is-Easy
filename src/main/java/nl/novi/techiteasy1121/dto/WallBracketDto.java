@@ -1,21 +1,26 @@
-package nl.novi.techiteasy1121.models;
+package nl.novi.techiteasy1121.dto;
 
-import javax.persistence.*;
+import lombok.Data;
 
-@Entity
-@Table(name="wall_brackets")
-public class WallBracket {
-
-    //  Een entiteit moet een primary key bevatten(id)
-    @Id
-    @GeneratedValue
-    @Column(unique = true, nullable = false)
-    Long id;
+@Data
+public class WallBracketDto {
+    private Long id;
 
     private String size;
     private Boolean adjustable;
     private String name;
     private Double price;
+
+    public WallBracketDto() {
+    }
+
+    public WallBracketDto( Long id, String size, Boolean adjustable, String name, Double price ) {
+        this.id = id;
+        this.size = size;
+        this.adjustable = adjustable;
+        this.name = name;
+        this.price = price;
+    }
 
     public Long getId() {
         return id;

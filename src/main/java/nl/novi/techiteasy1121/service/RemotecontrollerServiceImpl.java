@@ -1,39 +1,39 @@
 package nl.novi.techiteasy1121.service;
 
-import nl.novi.techiteasy1121.dto.RemoteControllerDto;
+import nl.novi.techiteasy1121.dto.RemotecontrollerDto;
 import nl.novi.techiteasy1121.exceptions.RecordNotFoundException;
-import nl.novi.techiteasy1121.models.RemoteController;
-import nl.novi.techiteasy1121.repositories.RemoteControllerRepository;
+import nl.novi.techiteasy1121.models.Remotecontroller;
+import nl.novi.techiteasy1121.repositories.RemotecontrollerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class RemoteControllerServiceImpl implements RemoteControllerService {
+public class RemotecontrollerServiceImpl implements RemotecontrollerService {
 
-    private final RemoteControllerRepository repository;
+    private final RemotecontrollerRepository repository;
 
-    public RemoteControllerServiceImpl( RemoteControllerRepository repository ) {
+    public RemotecontrollerServiceImpl( RemotecontrollerRepository repository ) {
         this.repository = repository;
     }
 
     //    Methode Robert-Jan
     @Override
-    public List<RemoteControllerDto> getAllRemoteControllers() {
-        List<RemoteController> lrc = this.repository.findAll();
-        List<RemoteControllerDto> lrcdto = new ArrayList<>();
+    public List<RemotecontrollerDto> getAllRemotecontrollers() {
+        List<Remotecontroller> lrc = this.repository.findAll();
+        List<RemotecontrollerDto> lrcdto = new ArrayList<>();
 
-        lrc.forEach( t -> lrcdto.add( new RemoteControllerDto( t.getId(), t.getCompatibleWith(), t.getBatteryType(), t.getName(), t.getBrand(), t.getPrice(), t.getOriginalStock() ) ) );
+        lrc.forEach( t -> lrcdto.add( new RemotecontrollerDto( t.getId(), t.getCompatibleWith(), t.getBatteryType(), t.getName(), t.getBrand(), t.getPrice(), t.getOriginalStock() ) ) );
 
         return lrcdto;
     }
 
     @Override
-    public RemoteControllerDto getRemoteControllerById( Long id ) {
-        RemoteControllerDto dto = new RemoteControllerDto();
+    public RemotecontrollerDto getRemotecontrollerById( Long id ) {
+        RemotecontrollerDto dto = new RemotecontrollerDto();
         if ( repository.findById( id ).isPresent() ) {
-            RemoteController rc = repository.findById( id ).get();
+            Remotecontroller rc = repository.findById( id ).get();
             dto.setId( rc.getId() );
             dto.setBrand( rc.getBrand() );
             dto.setBatteryType( rc.getBatteryType() );
@@ -47,8 +47,8 @@ public class RemoteControllerServiceImpl implements RemoteControllerService {
     }
 
     @Override
-    public RemoteController addRemoteController( RemoteControllerDto remoteControllerDto ) {
-        RemoteController rc = new RemoteController();
+    public Remotecontroller addRemotecontroller( RemotecontrollerDto remoteControllerDto ) {
+        Remotecontroller rc = new Remotecontroller();
         rc.setId( remoteControllerDto.getId() );
         rc.setBrand( remoteControllerDto.getBrand() );
         rc.setName( remoteControllerDto.getName() );
@@ -58,17 +58,17 @@ public class RemoteControllerServiceImpl implements RemoteControllerService {
     }
 
     @Override
-    public void deleteRemoteControllerById( Long id ) {
+    public void deleteRemotecontrollerById( Long id ) {
 
         repository.deleteById( id );
 
     }
 
     @Override
-    public RemoteControllerDto updateRemoteController ( Long id, RemoteControllerDto dto){
+    public RemotecontrollerDto updateRemotecontroller ( Long id, RemotecontrollerDto dto){
         if ( repository.findById( id ).isPresent() ) {
 
-            RemoteController rc = repository.findById( id ).get();
+            Remotecontroller rc = repository.findById( id ).get();
 
             rc.setId( rc.getId() );
             rc.setBrand( dto.getBrand() );

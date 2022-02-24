@@ -1,16 +1,10 @@
-package nl.novi.techiteasy1121.models;
+package nl.novi.techiteasy1121.dto;
 
-import javax.persistence.*;
+import lombok.Data;
 
-@Entity
-@Table(name = "remotecontrollers")
-public class RemoteController {
-
-    //  Een entiteit moet een primary key bevatten(id)
-    @Id
-    @GeneratedValue
-    @Column(unique = true, nullable = false)
-    Long id;
+@Data
+public class RemotecontrollerDto {
+private Long id;
 
     private String compatibleWith;
     private String batteryType;
@@ -18,6 +12,20 @@ public class RemoteController {
     private String brand;
     private Double price;
     private Integer originalStock;
+
+    public RemotecontrollerDto(){
+
+    }
+
+    public RemotecontrollerDto( Long id, String compatibleWith, String batteryType, String name, String brand, Double price, Integer originalStock ) {
+        this.id = id;
+        this.compatibleWith = compatibleWith;
+        this.batteryType = batteryType;
+        this.name = name;
+        this.brand = brand;
+        this.price = price;
+        this.originalStock = originalStock;
+    }
 
     public Long getId() {
         return id;

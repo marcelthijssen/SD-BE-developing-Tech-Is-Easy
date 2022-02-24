@@ -27,17 +27,8 @@ public class CiModuleController {
 
         return new ResponseEntity<>( lcm, HttpStatus.OK );
     }
-    //
-//    @GetMapping("/televisions/{id}")
-//    public ResponseEntity<Object> getTelevisionById( @PathVariable(name = "id") Long id ) {
-//        Television tv = service.getTelevisionById( id );
-//        if ( tv != null ) {
-//            return new ResponseEntity<>( tv, HttpStatus.OK );
-//        } else {
-//            return new ResponseEntity<>( "id Not Found", HttpStatus.NOT_FOUND );
-//        }
-//    }
-// changed <TelevisionDto> to <Object>
+
+
     @GetMapping("/cimodules/{id}")
     public ResponseEntity<Object> getCiModuleById( @PathVariable(name = "id") Long id ) {
         CiModuleDto tv = service.getCiModuleById( id );
