@@ -35,6 +35,7 @@ public class RemotecontrollerServiceImpl implements RemotecontrollerService {
         if ( rcRepository.findById( id ).isPresent() ) {
             Remotecontroller rc = rcRepository.findById( id ).get();
             dto.setId( rc.getId() );
+            dto.setCompatibleWith( rc.getCompatibleWith() );
             dto.setBrand( rc.getBrand() );
             dto.setBatteryType( rc.getBatteryType() );
             dto.setName( rc.getName() );
@@ -50,12 +51,15 @@ public class RemotecontrollerServiceImpl implements RemotecontrollerService {
     public Remotecontroller addRemotecontroller( RemotecontrollerDto remoteControllerDto ) {
         Remotecontroller rc = new Remotecontroller();
         rc.setId( remoteControllerDto.getId() );
+        rc.setCompatibleWith( remoteControllerDto.getCompatibleWith() );
         rc.setBrand( remoteControllerDto.getBrand() );
+        rc.setBatteryType( remoteControllerDto.getBatteryType() );
         rc.setName( remoteControllerDto.getName() );
         rc.setPrice( remoteControllerDto.getPrice() );
         rc.setOriginalStock( remoteControllerDto.getOriginalStock() );
         return this.rcRepository.save( rc );
     }
+
 
     @Override
     public void deleteRemotecontrollerById( Long id ) {
@@ -74,7 +78,8 @@ public class RemotecontrollerServiceImpl implements RemotecontrollerService {
             rc.setBrand( dto.getBrand() );
             rc.setName( dto.getName() );
             rc.setPrice( dto.getPrice() );
-
+            rc.setBatteryType( dto.getBatteryType() );
+            rc.setCompatibleWith( dto.getCompatibleWith() );
             rc.setOriginalStock( dto.getOriginalStock() );
             rcRepository.save( rc );
             return dto;

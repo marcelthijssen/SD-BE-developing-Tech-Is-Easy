@@ -2,10 +2,10 @@ package nl.novi.techiteasy1121.service;
 
 import nl.novi.techiteasy1121.dto.TelevisionDto;
 import nl.novi.techiteasy1121.exceptions.RecordNotFoundException;
-import nl.novi.techiteasy1121.models.Remotecontroller;
 import nl.novi.techiteasy1121.models.Television;
 import nl.novi.techiteasy1121.repositories.RemotecontrollerRepository;
 import nl.novi.techiteasy1121.repositories.TelevisionRepository;
+
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -121,7 +121,21 @@ public class TelevisionServiceImpl implements TelevisionService {
     }
 
     @Override
-    public TelevisionDto assignRemotecontrollerToTelevision( Long id, Remotecontroller remotecontroller ) {
-        return null;
+    public void assignRemotecontrollerToTelevision( Long id, Long remotecontrollerId ) {
+// 1 - check if tv exist in DB
+//        / If so get tv
+//
+        var optionalTelevision = tvRepository.findById( id );
+        var optionalRemotecontroller = rcRepository.findById( remotecontrollerId );
+
+        if ( optionalTelevision.isPresent() && optionalRemotecontroller.isPresent()) {
+            var television = optionalTelevision.get();
+            var remotecontroller = optionalRemotecontroller.get();
+
+            television.setRemotecontroller( remotecontroller );
+            tvRepository.save( television );
+        } else {
+             throw new RecordNotFoundException( "tv of rc bestaat niet");
+        }
     }
 }

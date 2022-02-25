@@ -13,7 +13,7 @@ public class CiModule {
     Long id;
 
 
-    @ManyToOne
+//    @ManyToOne
 
     private String name;
     private String type;

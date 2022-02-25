@@ -1,5 +1,6 @@
 package nl.novi.techiteasy1121.controllers;
 
+import nl.novi.techiteasy1121.dto.IdInputDto;
 import nl.novi.techiteasy1121.dto.TelevisionDto;
 import nl.novi.techiteasy1121.exceptions.RecordNotFoundException;
 import nl.novi.techiteasy1121.service.TelevisionService;
@@ -15,34 +16,25 @@ import java.util.List;
 @RestController
 public class TelevisionController {
 
-    private final TelevisionService service;
-    public TelevisionController( TelevisionService service ) {
-        this.service = service;
-    }
+    private final TelevisionService tvService;
 
+    public TelevisionController( TelevisionService tvService ) {
+        this.tvService = tvService;
+    }
 
     @GetMapping("/televisions")
     public ResponseEntity<Object> getAllTelevisions() {
-        List<TelevisionDto> lt = service.getAllTelevisions();
+        List<TelevisionDto> lt = tvService.getAllTelevisions();
 
         return new ResponseEntity<>( lt, HttpStatus.OK );
     }
-//
-//    @GetMapping("/televisions/{id}")
-//    public ResponseEntity<Object> getTelevisionById( @PathVariable(name = "id") Long id ) {
-//        Television tv = service.getTelevisionById( id );
-//        if ( tv != null ) {
-//            return new ResponseEntity<>( tv, HttpStatus.OK );
-//        } else {
-//            return new ResponseEntity<>( "id Not Found", HttpStatus.NOT_FOUND );
-//        }
-//    }
-// changed <TelevisionDto> to <Object>
+
+    // changed <TelevisionDto> to <Object>
     @GetMapping("/televisions/{id}")
     public ResponseEntity<Object> getTelevisionById( @PathVariable(name = "id") Long id ) {
-        TelevisionDto tv = service.getTelevisionById( id );
+        TelevisionDto tv = tvService.getTelevisionById( id );
         try {
-            return ResponseEntity.ok(tv);
+            return ResponseEntity.ok( tv );
         } catch ( Exception ex ) {
             throw new RecordNotFoundException( "Not found" );
         }
@@ -59,24 +51,33 @@ public class TelevisionController {
             }
             return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
         } else {
-            service.addTelevision( televisionDto );
+            tvService.addTelevision( televisionDto );
             return new ResponseEntity( "Televisie aangemaakt", HttpStatus.CREATED );
         }
     }
 
     @DeleteMapping("/televisions/{id}")
-    public void deleteTelevisionById(@PathVariable("id") Long id) {
+    public void deleteTelevisionById( @PathVariable("id") Long id ) {
 
-        service.deleteTelevisionById(id);
+        tvService.deleteTelevisionById( id );
 
     }
 
     @PutMapping("televisions/{id}")
-    public TelevisionDto updateTelevision(@PathVariable("id") Long id, @RequestBody TelevisionDto television) {
+    public TelevisionDto updateTelevision( @PathVariable("id") Long id, @RequestBody TelevisionDto television ) {
 
-        TelevisionDto dto = service.updateTelevision(id, television);
+        TelevisionDto dto = tvService.updateTelevision( id, television );
 
         return dto;
 
     }
+
+    //    //    class relationship
+    @PutMapping("/televisions/{tvid}/{rcid}")
+    public ResponseEntity<Object> assignRemotecontrollerToTelevision( @PathVariable("tvid") Long id, @PathVariable("rcid") Long remotecontrollerId ) {
+
+        tvService.assignRemotecontrollerToTelevision( id, remotecontrollerId );
+        return new ResponseEntity<>( "rc gekoppeld aan tv", HttpStatus.ACCEPTED );
+    }
+
 }
