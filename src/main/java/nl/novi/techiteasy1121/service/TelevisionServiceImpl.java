@@ -12,16 +12,16 @@ import java.util.List;
 @Service
 public class TelevisionServiceImpl implements TelevisionService {
 
-    private final TelevisionRepository repository;
+    private final TelevisionRepository tvRepository;
 
-    public TelevisionServiceImpl( TelevisionRepository repository ) {
-        this.repository = repository;
+    public TelevisionServiceImpl( TelevisionRepository tvRepository ) {
+        this.tvRepository = tvRepository;
     }
 
     //    Methode Robert-Jan
     @Override
     public List<TelevisionDto> getAllTelevisions() {
-        List<Television> lt = this.repository.findAll();
+        List<Television> lt = this.tvRepository.findAll();
         List<TelevisionDto> ltdto = new ArrayList<>();
 
         lt.forEach( t -> ltdto.add( new TelevisionDto( t.getId(), t.getType(), t.getBrand(), t.getName(), t.getPrice(), t.getAvailableSize(), t.getRefreshRate(), t.getScreenType(), t.getScreenQuality(), t.getSmartTv(), t.getWifi(), t.getVoiceControl(), t.getHdr(), t.getBluetooth(), t.getAmbiLight(), t.getOriginalStock(), t.getSold() ) ) );
@@ -30,7 +30,7 @@ public class TelevisionServiceImpl implements TelevisionService {
     }
 //    @Override
 //    public List<TelevisionDto> getAllTelevisions() {
-//        List<Television> tvList = televisionRepository.findAll();
+//        List<Television> tvList = televisiontvRepository.findAll();
 //        List<TelevisionDto> tvDtoList = new ArrayList<>();
 //        TelevisionDto dto = new TelevisionDto();
 //
@@ -62,8 +62,8 @@ public class TelevisionServiceImpl implements TelevisionService {
     @Override
     public TelevisionDto getTelevisionById( Long id ) {
         TelevisionDto dto = new TelevisionDto();
-        if ( repository.findById( id ).isPresent() ) {
-            Television tv = repository.findById( id ).get();
+        if ( tvRepository.findById( id ).isPresent() ) {
+            Television tv = tvRepository.findById( id ).get();
             dto.setId( tv.getId() );
             dto.setType( tv.getType() );
             dto.setBrand( tv.getBrand() );
@@ -107,21 +107,21 @@ public class TelevisionServiceImpl implements TelevisionService {
         t.setAmbiLight( televisionDto.getAmbiLight() );
         t.setOriginalStock( televisionDto.getOriginalStock() );
         t.setSold( televisionDto.getSold() );
-        return this.repository.save( t );
+        return this.tvRepository.save( t );
     }
 
     @Override
     public void deleteTelevisionById( Long id ) {
 
-        repository.deleteById( id );
+        tvRepository.deleteById( id );
 
     }
 
     @Override
     public TelevisionDto updateTelevision( Long id, TelevisionDto dto ) {
-        if ( repository.findById( id ).isPresent() ) {
+        if ( tvRepository.findById( id ).isPresent() ) {
 
-            Television tv = repository.findById( id ).get();
+            Television tv = tvRepository.findById( id ).get();
 
             tv.setId( tv.getId() );
             tv.setType( dto.getType() );
@@ -140,7 +140,7 @@ public class TelevisionServiceImpl implements TelevisionService {
             tv.setAmbiLight( dto.getAmbiLight() );
             tv.setOriginalStock( dto.getOriginalStock() );
             tv.setSold( dto.getSold() );
-            repository.save( tv );
+            tvRepository.save( tv );
             return dto;
         } else {
             throw new RecordNotFoundException( "geen televisie gevonden" );

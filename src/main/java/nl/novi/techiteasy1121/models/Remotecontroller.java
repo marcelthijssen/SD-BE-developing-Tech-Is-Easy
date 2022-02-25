@@ -6,11 +6,24 @@ import javax.persistence.*;
 @Table(name = "remotecontrollers")
 public class Remotecontroller {
 
-    //  Een entiteit moet een primary key bevatten(id)
     @Id
     @GeneratedValue
     @Column(unique = true, nullable = false)
     Long id;
+
+
+    @OneToOne(mappedBy="remotecontroller")
+    private Television television;
+
+    public Television getTelevision() {
+        return television;
+    }
+
+    public void setTelevision( Television television ) {
+        this.television = television;
+    }
+//    @OneToMany(mappedBy="ciModule")
+//    private Television television;
 
     private String compatibleWith;
     private String batteryType;

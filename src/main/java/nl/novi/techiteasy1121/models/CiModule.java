@@ -12,6 +12,9 @@ public class CiModule {
     @Column(unique = true, nullable = false)
     Long id;
 
+
+    @ManyToOne
+
     private String name;
     private String type;
     private Double price;

@@ -12,16 +12,16 @@ import java.util.List;
 @Service
 public class RemotecontrollerServiceImpl implements RemotecontrollerService {
 
-    private final RemotecontrollerRepository repository;
+    private final RemotecontrollerRepository rcRepository;
 
-    public RemotecontrollerServiceImpl( RemotecontrollerRepository repository ) {
-        this.repository = repository;
+    public RemotecontrollerServiceImpl( RemotecontrollerRepository rcRepository ) {
+        this.rcRepository = rcRepository;
     }
 
     //    Methode Robert-Jan
     @Override
     public List<RemotecontrollerDto> getAllRemotecontrollers() {
-        List<Remotecontroller> lrc = this.repository.findAll();
+        List<Remotecontroller> lrc = this.rcRepository.findAll();
         List<RemotecontrollerDto> lrcdto = new ArrayList<>();
 
         lrc.forEach( t -> lrcdto.add( new RemotecontrollerDto( t.getId(), t.getCompatibleWith(), t.getBatteryType(), t.getName(), t.getBrand(), t.getPrice(), t.getOriginalStock() ) ) );
@@ -32,8 +32,8 @@ public class RemotecontrollerServiceImpl implements RemotecontrollerService {
     @Override
     public RemotecontrollerDto getRemotecontrollerById( Long id ) {
         RemotecontrollerDto dto = new RemotecontrollerDto();
-        if ( repository.findById( id ).isPresent() ) {
-            Remotecontroller rc = repository.findById( id ).get();
+        if ( rcRepository.findById( id ).isPresent() ) {
+            Remotecontroller rc = rcRepository.findById( id ).get();
             dto.setId( rc.getId() );
             dto.setBrand( rc.getBrand() );
             dto.setBatteryType( rc.getBatteryType() );
@@ -54,21 +54,21 @@ public class RemotecontrollerServiceImpl implements RemotecontrollerService {
         rc.setName( remoteControllerDto.getName() );
         rc.setPrice( remoteControllerDto.getPrice() );
         rc.setOriginalStock( remoteControllerDto.getOriginalStock() );
-        return this.repository.save( rc );
+        return this.rcRepository.save( rc );
     }
 
     @Override
     public void deleteRemotecontrollerById( Long id ) {
 
-        repository.deleteById( id );
+        rcRepository.deleteById( id );
 
     }
 
     @Override
     public RemotecontrollerDto updateRemotecontroller ( Long id, RemotecontrollerDto dto){
-        if ( repository.findById( id ).isPresent() ) {
+        if ( rcRepository.findById( id ).isPresent() ) {
 
-            Remotecontroller rc = repository.findById( id ).get();
+            Remotecontroller rc = rcRepository.findById( id ).get();
 
             rc.setId( rc.getId() );
             rc.setBrand( dto.getBrand() );
@@ -76,7 +76,7 @@ public class RemotecontrollerServiceImpl implements RemotecontrollerService {
             rc.setPrice( dto.getPrice() );
 
             rc.setOriginalStock( dto.getOriginalStock() );
-            repository.save( rc );
+            rcRepository.save( rc );
             return dto;
         } else {
             throw new RecordNotFoundException( "geen televisie gevonden" );

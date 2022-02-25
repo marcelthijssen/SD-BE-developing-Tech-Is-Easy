@@ -13,6 +13,18 @@ public class Television {
     @Column(unique = true, nullable = false)
     Long id;
 
+    @OneToOne
+    @JoinColumn(name="remotecontroller_id", referencedColumnName="id")
+    private Remotecontroller remotecontroller;
+
+    public Remotecontroller getRemotecontroller() {
+        return remotecontroller;
+    }
+
+    public void setRemotecontroller( Remotecontroller remotecontroller ) {
+        this.remotecontroller = remotecontroller;
+    }
+
     private String type;
     private String brand;
     private String name;
