@@ -1,6 +1,7 @@
 package nl.novi.techiteasy1121.service;
 
 import nl.novi.techiteasy1121.dto.TelevisionDto;
+import nl.novi.techiteasy1121.models.Remotecontroller;
 import nl.novi.techiteasy1121.models.Television;
 import nl.novi.techiteasy1121.repositories.RemotecontrollerRepository;
 import nl.novi.techiteasy1121.repositories.TelevisionRepository;
@@ -10,11 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 public interface TelevisionService {
-//
-//    @Autowired
-//    public TelevisionService (TelevisionRepository tvRepository, RemotecontrollerRepository rcRepository) {
-//        this.tvRepository = tvRepository; this.rcRepository = rcRepository;
-//    }
+
 
     List<TelevisionDto> getAllTelevisions();
 
@@ -27,5 +24,6 @@ public interface TelevisionService {
     TelevisionDto updateTelevision( Long id, TelevisionDto dto );
 
 //    oneToOne
-//    assignRemotecontrollerToTelevision();
+
+    TelevisionDto assignRemotecontrollerToTelevision( Long id, Remotecontroller remotecontroller );
 }

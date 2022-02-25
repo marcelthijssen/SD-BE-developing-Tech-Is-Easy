@@ -2,7 +2,9 @@ package nl.novi.techiteasy1121.service;
 
 import nl.novi.techiteasy1121.dto.TelevisionDto;
 import nl.novi.techiteasy1121.exceptions.RecordNotFoundException;
+import nl.novi.techiteasy1121.models.Remotecontroller;
 import nl.novi.techiteasy1121.models.Television;
+import nl.novi.techiteasy1121.repositories.RemotecontrollerRepository;
 import nl.novi.techiteasy1121.repositories.TelevisionRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +15,13 @@ import java.util.List;
 public class TelevisionServiceImpl implements TelevisionService {
 
     private final TelevisionRepository tvRepository;
+    private final RemotecontrollerRepository rcRepository;
 
-    public TelevisionServiceImpl( TelevisionRepository tvRepository ) {
+    public TelevisionServiceImpl( TelevisionRepository tvRepository, RemotecontrollerRepository rcRepository ) {
         this.tvRepository = tvRepository;
+        this.rcRepository = rcRepository;
     }
 
-    //    Methode Robert-Jan
     @Override
     public List<TelevisionDto> getAllTelevisions() {
         List<Television> lt = this.tvRepository.findAll();
@@ -28,36 +31,6 @@ public class TelevisionServiceImpl implements TelevisionService {
 
         return ltdto;
     }
-//    @Override
-//    public List<TelevisionDto> getAllTelevisions() {
-//        List<Television> tvList = televisiontvRepository.findAll();
-//        List<TelevisionDto> tvDtoList = new ArrayList<>();
-//        TelevisionDto dto = new TelevisionDto();
-//
-//        for ( Television tv : tvList ) {
-//            dto.setId( tv.getId() );
-//            dto.setType( tv.getType() );
-//            dto.setBrand( tv.getBrand() );
-//            dto.setName( tv.getName() );
-//            dto.setPrice( tv.getPrice() );
-//            dto.setAvailableSize( tv.getAvailableSize() );
-//            dto.setRefreshRate( tv.getRefreshRate() );
-//            dto.setScreenType( tv.getScreenType() );
-//            dto.setScreenQuality( tv.getScreenQuality() );
-//            dto.setSmartTv( tv.getSmartTv() );
-//            dto.setWifi( tv.getWifi() );
-//            dto.setVoiceControl( tv.getVoiceControl() );
-//            dto.setHdr( tv.getHdr() );
-//            dto.setBluetooth( tv.getBluetooth() );
-//            dto.setAmbiLight( tv.getAmbiLight() );
-//            dto.setOriginalStock( tv.getOriginalStock() );
-//            dto.setSold( tv.getSold() );
-//
-////            Add tv(dto) to a list(tvDtoList)
-//            tvDtoList.add(dto);
-//        }
-//        return tvDtoList;
-//    }
 
     @Override
     public TelevisionDto getTelevisionById( Long id ) {
@@ -145,5 +118,10 @@ public class TelevisionServiceImpl implements TelevisionService {
         } else {
             throw new RecordNotFoundException( "geen televisie gevonden" );
         }
+    }
+
+    @Override
+    public TelevisionDto assignRemotecontrollerToTelevision( Long id, Remotecontroller remotecontroller ) {
+        return null;
     }
 }
