@@ -19,5 +19,6 @@ public interface TelevisionService {
     TelevisionDto updateTelevision( Long id, TelevisionDto dto );
 
 //    oneToOne
+
     void assignRemotecontrollerToTelevision( Long id, Long remotecontrollerId );
 }
