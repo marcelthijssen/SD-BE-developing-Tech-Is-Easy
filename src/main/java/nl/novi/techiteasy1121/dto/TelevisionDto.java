@@ -1,6 +1,9 @@
 package nl.novi.techiteasy1121.dto;
 
 import lombok.Data;
+import nl.novi.techiteasy1121.models.CiModule;
+import nl.novi.techiteasy1121.models.Remotecontroller;
+import nl.novi.techiteasy1121.models.WallBracket;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
@@ -19,7 +22,7 @@ public class TelevisionDto {
     @NotBlank(message = "Field 'name' can not be empty")
     private String name;
 
-    @DecimalMin("0.0")
+    @DecimalMin("0.00")
     private Double price;
     private Double availableSize;
     private Double refreshRate;
@@ -51,12 +54,16 @@ public class TelevisionDto {
     private Integer originalStock;
     private Integer sold;
 
+    private CiModule ciModule;
+    private Remotecontroller remotecontroller;
+    private WallBracket wallBracket;
+
     // Een default constructor
-    public TelevisionDto() {
-    }
+    public TelevisionDto(  ) { }
+
 
     // Een constructor met alle gevraagde variable
-    public TelevisionDto(
+   public TelevisionDto(
             Long id,
             String type,
             String brand,
@@ -73,7 +80,10 @@ public class TelevisionDto {
             Boolean bluetooth,
             Boolean ambiLight,
             Integer originalStock,
-            Integer sold ) {
+            Integer sold,
+            CiModule ciModule,
+            Remotecontroller remotecontroller,
+            WallBracket wallBracket ) {
         this.id = id;
         this.type = type;
         this.brand = brand;
@@ -91,6 +101,8 @@ public class TelevisionDto {
         this.ambiLight = ambiLight;
         this.originalStock = originalStock;
         this.sold = sold;
+        this.ciModule = ciModule;
+        this.remotecontroller = remotecontroller;
     }
 
 
@@ -228,5 +240,31 @@ public class TelevisionDto {
 
     public void setSold( Integer sold ) {
         this.sold = sold;
+    }
+
+
+    public void setRemotecontroller( Remotecontroller remotecontroller ) {
+        this.remotecontroller = remotecontroller;
+    }
+
+    public Remotecontroller getRemotecontroller() {
+        return remotecontroller;
+    }
+
+
+    public void setCiModule( CiModule ciModule ) {
+        this.ciModule = ciModule;
+    }
+
+    public CiModule getCiModule() {
+        return ciModule;
+    }
+
+
+    public void setWallBracket( WallBracket wallBracket ){
+        this.wallBracket = wallBracket;
+    }
+    public WallBracket getWallBracket() {
+        return wallBracket;
     }
 }

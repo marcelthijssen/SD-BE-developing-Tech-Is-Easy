@@ -1,5 +1,6 @@
 package nl.novi.techiteasy1121.controllers;
 
+import nl.novi.techiteasy1121.dto.RemotecontrollerDto;
 import nl.novi.techiteasy1121.dto.TelevisionDto;
 import nl.novi.techiteasy1121.exceptions.RecordNotFoundException;
 import nl.novi.techiteasy1121.service.TelevisionService;
@@ -73,10 +74,20 @@ public class TelevisionController {
 
     //    //    class relationship
     @PutMapping("/televisions/{tvid}/{rcid}")
-    public ResponseEntity<Object> assignRemotecontrollerToTelevision( @PathVariable("tvid") Long id, @PathVariable("rcid") Long remotecontrollerId ) {
-
-        tvService.assignRemotecontrollerToTelevision( id, remotecontrollerId );
+    public ResponseEntity<Object> assignRemotecontrollerToTelevision( @PathVariable("tvid") Long id, @PathVariable("rcid") Long rcid ) {
+        tvService.assignRemotecontrollerToTelevision( id, rcid );
         return new ResponseEntity<>( "rc gekoppeld aan tv", HttpStatus.ACCEPTED );
     }
 
+    @PutMapping("/televisions/cm/{tvid}/{cmid}")
+    public ResponseEntity<Object> assignCiModuleToTelevision( @PathVariable("tvid") Long id, @PathVariable("cmid") Long cmid ) {
+        tvService.assignCiModuleToTelevision( id, cmid );
+        return new ResponseEntity<>( "CiModule gekoppeld aan tv", HttpStatus.ACCEPTED );
+    }
+
+    @PutMapping("/televisions/wb/{tvid}/{wbid}")
+    public ResponseEntity<Object> assignWallBracketToTelevision( @PathVariable("tvid") Long id, @PathVariable("wbid") Long wbid ) {
+        tvService.assignWallBracketToTelevision( id, wbid );
+        return new ResponseEntity<>( "WallBracketgekoppeld aan tv", HttpStatus.ACCEPTED );
+    }
 }

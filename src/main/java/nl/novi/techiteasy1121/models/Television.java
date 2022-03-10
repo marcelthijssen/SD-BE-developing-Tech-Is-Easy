@@ -1,10 +1,17 @@
 package nl.novi.techiteasy1121.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Data;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name="televisions")
+@Data
+@Table(name = "televisions")
 public class Television {
 
     //  Een entiteit moet een primary key bevatten(id)
@@ -13,17 +20,25 @@ public class Television {
     @Column(unique = true, nullable = false)
     Long id;
 
+    @ManyToMany
+    @JsonIgnore
+    @JoinTable(
+            name = "television_wallbrackets",
+            joinColumns = @JoinColumn(name = "wallbracket_id"),
+            inverseJoinColumns = @JoinColumn(name = "television_id"))
+    Set<Television> televisions = new HashSet<>();
+//    private WallBracket wallBracket;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "ci_module_id", referencedColumnName = "id", nullable = true)
+    @JsonManagedReference
+    private CiModule ciModule;
+
     @OneToOne
-    @JoinColumn(name="remotecontroller_id", referencedColumnName="id")
+    @JsonIgnore
+    @JoinColumn(name = "remotecontroller_id", referencedColumnName = "id")
     private Remotecontroller remotecontroller;
-
-    public Remotecontroller getRemotecontroller() {
-        return remotecontroller;
-    }
-
-    public void setRemotecontroller( Remotecontroller remotecontroller ) {
-        this.remotecontroller = remotecontroller;
-    }
 
     private String type;
     private String brand;
@@ -177,4 +192,28 @@ public class Television {
     public void setSold( Integer sold ) {
         this.sold = sold;
     }
+
+
+    public Remotecontroller getRemotecontroller() {
+        return remotecontroller;
+    }
+
+    public void setRemotecontroller( Remotecontroller remotecontroller ) {
+        this.remotecontroller = remotecontroller;
+    }
+
+    public void setCiModule( CiModule ciModule ) {
+        this.ciModule = ciModule;
+    }
+
+    public CiModule getCiModule() {
+        return ciModule;
+    }
+
+//    public void setWallBracket( WallBracket wallBracket ){
+//        this.wallBracket = wallBracket;
+//    }
+//    public WallBracket getWallBracket() {
+//        return wallBracket;
+//    }
 }

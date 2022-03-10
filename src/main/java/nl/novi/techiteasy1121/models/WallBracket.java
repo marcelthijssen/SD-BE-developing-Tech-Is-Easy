@@ -1,6 +1,8 @@
 package nl.novi.techiteasy1121.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="wall_brackets")
@@ -11,6 +13,14 @@ public class WallBracket {
     @GeneratedValue
     @Column(unique = true, nullable = false)
     Long id;
+
+    @ManyToMany
+    @JoinTable(
+            name = "television_wallbrackets",
+            joinColumns = @JoinColumn(name = "wallbracket_id"),
+            inverseJoinColumns = @JoinColumn(name = "television_id"))
+    Set<Television> televisions = new HashSet<>();
+
 
     private String size;
     private Boolean adjustable;

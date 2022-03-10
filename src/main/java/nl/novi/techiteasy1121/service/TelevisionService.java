@@ -1,5 +1,6 @@
 package nl.novi.techiteasy1121.service;
 
+import nl.novi.techiteasy1121.dto.RemotecontrollerDto;
 import nl.novi.techiteasy1121.dto.TelevisionDto;
 import nl.novi.techiteasy1121.models.Television;
 
@@ -18,7 +19,11 @@ public interface TelevisionService {
 
     TelevisionDto updateTelevision( Long id, TelevisionDto dto );
 
-//    oneToOne
+//    oneToOne - Remotecontroller
+    void assignRemotecontrollerToTelevision( Long id, Long rcid );
 
-    void assignRemotecontrollerToTelevision( Long id, Long remotecontrollerId );
+    void assignCiModuleToTelevision(Long id, Long cmid);
+
+    void assignWallBracketToTelevision(Long id, Long wbid);
+
 }

@@ -1,5 +1,7 @@
 package nl.novi.techiteasy1121.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,7 +13,7 @@ public class Remotecontroller {
     @Column(unique = true, nullable = false)
     Long id;
 
-
+    @JsonIgnore
     @OneToOne(mappedBy="remotecontroller")
     private Television television;
 

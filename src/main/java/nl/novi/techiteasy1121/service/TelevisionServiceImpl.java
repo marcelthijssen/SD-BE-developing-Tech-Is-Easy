@@ -3,9 +3,12 @@ package nl.novi.techiteasy1121.service;
 import nl.novi.techiteasy1121.dto.TelevisionDto;
 import nl.novi.techiteasy1121.exceptions.RecordNotFoundException;
 import nl.novi.techiteasy1121.models.Television;
+import nl.novi.techiteasy1121.models.WallBracket;
+import nl.novi.techiteasy1121.repositories.CiModuleRepository;
 import nl.novi.techiteasy1121.repositories.RemotecontrollerRepository;
 import nl.novi.techiteasy1121.repositories.TelevisionRepository;
 
+import nl.novi.techiteasy1121.repositories.WallBracketRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,20 +19,50 @@ public class TelevisionServiceImpl implements TelevisionService {
 
     private final TelevisionRepository tvRepository;
     private final RemotecontrollerRepository rcRepository;
+    private final WallBracketRepository wbRepository;
+    private final CiModuleRepository cmRepository;
 
-    public TelevisionServiceImpl( TelevisionRepository tvRepository, RemotecontrollerRepository rcRepository ) {
+    public TelevisionServiceImpl( TelevisionRepository tvRepository, RemotecontrollerRepository rcRepository, CiModuleRepository cmRepository, WallBracketRepository wbRepository ) {
         this.tvRepository = tvRepository;
         this.rcRepository = rcRepository;
+        this.wbRepository = wbRepository;
+        this.cmRepository = cmRepository;
     }
 
     @Override
     public List<TelevisionDto> getAllTelevisions() {
-        List<Television> lt = this.tvRepository.findAll();
+        List<Television> tvList = this.tvRepository.findAll();
         List<TelevisionDto> ltdto = new ArrayList<>();
 
-        lt.forEach( t -> ltdto.add( new TelevisionDto( t.getId(), t.getType(), t.getBrand(), t.getName(), t.getPrice(), t.getAvailableSize(), t.getRefreshRate(), t.getScreenType(), t.getScreenQuality(), t.getSmartTv(), t.getWifi(), t.getVoiceControl(), t.getHdr(), t.getBluetooth(), t.getAmbiLight(), t.getOriginalStock(), t.getSold() ) ) );
-
+        for ( Television tv : tvList ) {
+            TelevisionDto dto = new TelevisionDto();
+            dto.setId( tv.getId() );
+            dto.setType( tv.getType() );
+            dto.setBrand( tv.getBrand() );
+            dto.setName( tv.getName() );
+            dto.setPrice( tv.getPrice() );
+            dto.setAvailableSize( tv.getAvailableSize() );
+            dto.setRefreshRate( tv.getRefreshRate() );
+            dto.setScreenType( tv.getScreenType() );
+            dto.setScreenQuality( tv.getScreenQuality() );
+            dto.setSmartTv( tv.getSmartTv() );
+            dto.setWifi( tv.getWifi() );
+            dto.setVoiceControl( tv.getVoiceControl() );
+            dto.setHdr( tv.getHdr() );
+            dto.setBluetooth( tv.getBluetooth() );
+            dto.setAmbiLight( tv.getAmbiLight() );
+            dto.setOriginalStock( tv.getOriginalStock() );
+            dto.setSold( tv.getSold() );
+            dto.setCiModule( tv.getCiModule() );
+            dto.setRemotecontroller( tv.getRemotecontroller() );
+            dto.setWallBracket( tv.getWallBracket() );
+            ltdto.add( dto );
+        }
         return ltdto;
+//
+//        lt.forEach( t -> ltdto.add( new TelevisionDto( t.getId(), t.getType(), t.getBrand(), t.getName(), t.getPrice(), t.getAvailableSize(), t.getRefreshRate(), t.getScreenType(), t.getScreenQuality(), t.getSmartTv(), t.getWifi(), t.getVoiceControl(), t.getHdr(), t.getBluetooth(), t.getAmbiLight(), t.getOriginalStock(), t.getSold() ) ) );
+//
+//        return ltdto;
     }
 
     @Override
@@ -53,7 +86,11 @@ public class TelevisionServiceImpl implements TelevisionService {
             dto.setBluetooth( tv.getBluetooth() );
             dto.setAmbiLight( tv.getAmbiLight() );
             dto.setOriginalStock( tv.getOriginalStock() );
+//            Manually added
             dto.setSold( tv.getSold() );
+            dto.setCiModule( tv.getCiModule() );
+            dto.setRemotecontroller( tv.getRemotecontroller() );
+            dto.setWallBracket( tv.getWallBracket() );
             return dto;
         } else {
             throw new RecordNotFoundException( "Geen tv gevonden" );
@@ -121,21 +158,51 @@ public class TelevisionServiceImpl implements TelevisionService {
     }
 
     @Override
-    public void assignRemotecontrollerToTelevision( Long id, Long remotecontrollerId ) {
-// 1 - check if tv exist in DB
-//        / If so get tv
-//
+    public void assignRemotecontrollerToTelevision( Long id, Long rcid ) {
         var optionalTelevision = tvRepository.findById( id );
-        var optionalRemotecontroller = rcRepository.findById( remotecontrollerId );
+        var optionalRemotecontroller = rcRepository.findById( rcid );
 
-        if ( optionalTelevision.isPresent() && optionalRemotecontroller.isPresent()) {
+        if ( optionalTelevision.isPresent() && optionalRemotecontroller.isPresent() ) {
             var television = optionalTelevision.get();
             var remotecontroller = optionalRemotecontroller.get();
 
             television.setRemotecontroller( remotecontroller );
             tvRepository.save( television );
         } else {
-             throw new RecordNotFoundException( "tv of rc bestaat niet");
+            throw new RecordNotFoundException( "tv of rc bestaat niet" );
         }
     }
+
+    @Override
+    public void assignCiModuleToTelevision( Long id, Long cmid ) {
+        var optionalTelevision = tvRepository.findById( id );
+        var optionalCiModule = cmRepository.findById( cmid );
+
+        if ( optionalTelevision.isPresent() && optionalCiModule.isPresent() ) {
+            var television = optionalTelevision.get();
+            var ciModule = optionalCiModule.get();
+
+            television.setCiModule( ciModule );
+            tvRepository.save( television );
+        } else {
+            throw new RecordNotFoundException( "tv of rc bestaat niet" );
+        }
+    }
+
+    @Override
+    public void assignWallBracketToTelevision( Long id, Long wbid ) {
+        var optionalTelevision = tvRepository.findById( id );
+        var optionalWallBracket = wbRepository.findById( wbid );
+
+        if ( optionalTelevision.isPresent() && optionalWallBracket.isPresent() ) {
+            var tv = optionalTelevision.get();
+            var wb = optionalWallBracket.get();
+
+            tv.setWallBracket( wb );
+            tvRepository.save( tv );
+        } else {
+            throw new RecordNotFoundException( "tv of rc bestaat niet" );
+        }
+    }
+
 }
