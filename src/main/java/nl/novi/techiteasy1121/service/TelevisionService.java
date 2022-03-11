@@ -24,6 +24,6 @@ public interface TelevisionService {
 
     void assignCiModuleToTelevision(Long id, Long cmid);
 
-//    void assignWallBracketToTelevision(Long id, Long wbid);
+    void assignWallBracketToTelevision(Long id, Long wbid);
 
 }

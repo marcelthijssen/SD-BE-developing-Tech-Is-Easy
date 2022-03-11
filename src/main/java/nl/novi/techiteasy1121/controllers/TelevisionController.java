@@ -73,21 +73,21 @@ public class TelevisionController {
     }
 
     //    //    class relationship
-    @PutMapping("/televisions/{tvid}/{rcid}")
+    @PutMapping("/televisions/{tvid}/rc/{rcid}")
     public ResponseEntity<Object> assignRemotecontrollerToTelevision( @PathVariable("tvid") Long id, @PathVariable("rcid") Long rcid ) {
         tvService.assignRemotecontrollerToTelevision( id, rcid );
         return new ResponseEntity<>( "rc gekoppeld aan tv", HttpStatus.ACCEPTED );
     }
 
-    @PutMapping("/televisions/cm/{tvid}/{cmid}")
+    @PutMapping("/televisions/{tvid}/cm/{cmid}")
     public ResponseEntity<Object> assignCiModuleToTelevision( @PathVariable("tvid") Long id, @PathVariable("cmid") Long cmid ) {
         tvService.assignCiModuleToTelevision( id, cmid );
         return new ResponseEntity<>( "CiModule gekoppeld aan tv", HttpStatus.ACCEPTED );
     }
 
-//    @PutMapping("/televisions/wb/{tvid}/{wbid}")
-//    public ResponseEntity<Object> assignWallBracketToTelevision( @PathVariable("tvid") Long id, @PathVariable("wbid") Long wbid ) {
-//        tvService.assignWallBracketToTelevision( id, wbid );
-//        return new ResponseEntity<>( "WallBracketgekoppeld aan tv", HttpStatus.ACCEPTED );
-//    }
+    @PutMapping("/televisions/{tvid}/wb/{wbid}")
+    public ResponseEntity<Object> assignWallBracketToTelevision( @PathVariable("tvid") Long id, @PathVariable("wbid") Long wbid ) {
+        tvService.assignWallBracketToTelevision( id, wbid );
+        return new ResponseEntity<>( "WallBracket gekoppeld aan tv", HttpStatus.ACCEPTED );
+    }
 }

@@ -1,5 +1,7 @@
 package nl.novi.techiteasy1121.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,13 +16,10 @@ public class WallBracket {
     @Column(unique = true, nullable = false)
     Long id;
 
-    @ManyToMany
-    @JoinTable(
-            name = "television_wallbrackets",
-            joinColumns = @JoinColumn(name = "wallbracket_id"),
-            inverseJoinColumns = @JoinColumn(name = "television_id"))
-    Set<Television> televisions = new HashSet<>();
-
+    @JsonIgnore
+    @ManyToMany(
+            mappedBy = "wallBrackets")
+    private  Set<Television> televisions = new HashSet<>();
 
     private String size;
     private Boolean adjustable;
@@ -69,13 +68,12 @@ public class WallBracket {
 
 
 
-//
-//    public Set<Television> getTelevisions() {
-//        return televisions;
-//    }
-//
-//    public void setTelevisions(Set<Television> televisions) {
-//        this.televisions = televisions;
-//    }
+    public Set<Television> getTelevisions() {
+        return televisions;
+    }
+
+    public void setTelevisions(Set<Television> televisions) {
+        this.televisions = televisions;
+    }
 
 }

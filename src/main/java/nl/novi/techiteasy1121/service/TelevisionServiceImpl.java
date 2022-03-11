@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class TelevisionServiceImpl implements TelevisionService {
@@ -55,7 +56,7 @@ public class TelevisionServiceImpl implements TelevisionService {
             dto.setSold( tv.getSold() );
             dto.setCiModule( tv.getCiModule() );
             dto.setRemotecontroller( tv.getRemotecontroller() );
-//            dto.setWallBracket( tv.getWallBracket() );
+            dto.setWallBrackets( tv.getWallBrackets() );
             ltdto.add( dto );
         }
         return ltdto;
@@ -90,7 +91,7 @@ public class TelevisionServiceImpl implements TelevisionService {
             dto.setSold( tv.getSold() );
             dto.setCiModule( tv.getCiModule() );
             dto.setRemotecontroller( tv.getRemotecontroller() );
-//            dto.setWallBracket( tv.getWallBracket() );
+            dto.setWallBrackets( tv.getWallBrackets() );
             return dto;
         } else {
             throw new RecordNotFoundException( "Geen tv gevonden" );
@@ -189,20 +190,20 @@ public class TelevisionServiceImpl implements TelevisionService {
         }
     }
 
-//    @Override
-//    public void assignWallBracketToTelevision( Long id, Long wbid ) {
-//        var optionalTelevision = tvRepository.findById( id );
-//        var optionalWallBracket = wbRepository.findById( wbid );
-//
-//        if ( optionalTelevision.isPresent() && optionalWallBracket.isPresent() ) {
-//            var television = optionalTelevision.get();
-//            var wallBracket = optionalWallBracket.get();
-//
-//            television.setWallBrackets( wallBracket );
-//            tvRepository.save( television );
-//        } else {
-//            throw new RecordNotFoundException( "tv of rc bestaat niet" );
-//        }
-//    }
+    @Override
+    public void assignWallBracketToTelevision( Long id, Long wbid ) {
+        var optionalTelevision = tvRepository.findById( id );
+        var optionalWallBracket = wbRepository.findById( wbid );
+
+        if ( optionalTelevision.isPresent() && optionalWallBracket.isPresent() ) {
+            var television = optionalTelevision.get();
+            var wallBracket = optionalWallBracket.get();
+
+            television.getWallBrackets().add( wallBracket );
+            tvRepository.save( television );
+        } else {
+            throw new RecordNotFoundException( "tv of wb bestaat niet" );
+        }
+    }
 
 }

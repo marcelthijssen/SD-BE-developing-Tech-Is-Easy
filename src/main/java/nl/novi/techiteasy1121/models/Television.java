@@ -21,24 +21,26 @@ public class Television {
     Long id;
 
     @ManyToMany
-    @JsonIgnore
     @JoinTable(
             name = "television_wallbrackets",
             joinColumns = @JoinColumn(name = "wallbracket_id"),
             inverseJoinColumns = @JoinColumn(name = "television_id"))
-    Set<WallBracket> wallBrackets = new HashSet<>();
-//    private WallBracket wallBracket;
-
+    private Set<WallBracket> wallBrackets = new HashSet<>();
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "ci_module_id", referencedColumnName = "id", nullable = true)
+    @JoinColumn(
+            name = "ci_module_id",
+            referencedColumnName = "id",
+            nullable = true)
     @JsonManagedReference
     private CiModule ciModule;
 
     @OneToOne
     @JsonIgnore
-    @JoinColumn(name = "remotecontroller_id", referencedColumnName = "id")
+    @JoinColumn(
+            name = "remotecontroller_id",
+            referencedColumnName = "id")
     private Remotecontroller remotecontroller;
 
     private String type;
@@ -211,10 +213,10 @@ public class Television {
         return ciModule;
     }
 
-//
-//    public Set<WallBracket> getWallBracket() {
-//        return wallBrackets;
-//    }
+
+    public Set<WallBracket> getWallBrackets() {
+        return wallBrackets;
+    }
 //
 //    public void setWallBracket( Set<WallBracket> wallBrackets ) {
 //        this.wallBrackets = wallBrackets;

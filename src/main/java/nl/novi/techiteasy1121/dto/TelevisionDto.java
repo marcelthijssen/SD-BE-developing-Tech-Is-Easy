@@ -30,6 +30,7 @@ public class TelevisionDto {
     private Double availableSize;
     private Double refreshRate;
 
+
     //    @NotBlank(message = "screentype not valid")
     private String screenType;
 
@@ -60,7 +61,7 @@ public class TelevisionDto {
     private CiModule ciModule;
     private Remotecontroller remotecontroller;
 //    private WallBracket wallBracket;
-//    Set<WallBracket> wallBrackets = new HashSet<>();
+    private Set<WallBracket> wallBrackets = new HashSet<>();
 
     // Een default constructor
     public TelevisionDto() {
@@ -272,15 +273,8 @@ public class TelevisionDto {
 //        this.wallBracket = wallBracket;
 //    }
 
-//    public WallBracket getWallBracket() {
-//        return wallBracket;
-//    }
-//
-//    public Set<WallBracket> getWallBrackets() {
-//        return wallBrackets;
-//    }
-//
-//    public void setWallBrackets( Set<WallBracket> wallBrackets ) {
-//        this.wallBrackets = wallBrackets;
-//    }
+    public Set<WallBracket> getWallBrackets() {
+        return wallBrackets;
+    }
+
 }

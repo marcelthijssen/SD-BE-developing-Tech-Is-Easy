@@ -14,7 +14,7 @@ public class WallBracketDto {
     private Boolean adjustable;
     private String name;
     private Double price;
-//    Set<Television> televisions = new HashSet<>();
+    private Set<Television> televisions = new HashSet<>();
 
     public WallBracketDto() {
     }
@@ -68,9 +68,9 @@ public class WallBracketDto {
     }
 
 
-//    public Set<Television> getTelevisions() {
-//        return televisions;
-//    }
+    public Set<Television> getTelevisions() {
+        return televisions;
+    }
 
 //    public void setTelevisions(Set<Television> televisions) {
 //        this.televisions = televisions;
