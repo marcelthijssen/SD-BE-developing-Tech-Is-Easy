@@ -55,7 +55,7 @@ public class TelevisionServiceImpl implements TelevisionService {
             dto.setSold( tv.getSold() );
             dto.setCiModule( tv.getCiModule() );
             dto.setRemotecontroller( tv.getRemotecontroller() );
-            dto.setWallBracket( tv.getWallBracket() );
+//            dto.setWallBracket( tv.getWallBracket() );
             ltdto.add( dto );
         }
         return ltdto;
@@ -86,11 +86,11 @@ public class TelevisionServiceImpl implements TelevisionService {
             dto.setBluetooth( tv.getBluetooth() );
             dto.setAmbiLight( tv.getAmbiLight() );
             dto.setOriginalStock( tv.getOriginalStock() );
-//            Manually added
+//            Added Manually after @OneToOne etc
             dto.setSold( tv.getSold() );
             dto.setCiModule( tv.getCiModule() );
             dto.setRemotecontroller( tv.getRemotecontroller() );
-            dto.setWallBracket( tv.getWallBracket() );
+//            dto.setWallBracket( tv.getWallBracket() );
             return dto;
         } else {
             throw new RecordNotFoundException( "Geen tv gevonden" );
@@ -189,20 +189,20 @@ public class TelevisionServiceImpl implements TelevisionService {
         }
     }
 
-    @Override
-    public void assignWallBracketToTelevision( Long id, Long wbid ) {
-        var optionalTelevision = tvRepository.findById( id );
-        var optionalWallBracket = wbRepository.findById( wbid );
-
-        if ( optionalTelevision.isPresent() && optionalWallBracket.isPresent() ) {
-            var tv = optionalTelevision.get();
-            var wb = optionalWallBracket.get();
-
-            tv.setWallBracket( wb );
-            tvRepository.save( tv );
-        } else {
-            throw new RecordNotFoundException( "tv of rc bestaat niet" );
-        }
-    }
+//    @Override
+//    public void assignWallBracketToTelevision( Long id, Long wbid ) {
+//        var optionalTelevision = tvRepository.findById( id );
+//        var optionalWallBracket = wbRepository.findById( wbid );
+//
+//        if ( optionalTelevision.isPresent() && optionalWallBracket.isPresent() ) {
+//            var television = optionalTelevision.get();
+//            var wallBracket = optionalWallBracket.get();
+//
+//            television.setWallBrackets( wallBracket );
+//            tvRepository.save( television );
+//        } else {
+//            throw new RecordNotFoundException( "tv of rc bestaat niet" );
+//        }
+//    }
 
 }

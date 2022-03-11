@@ -1,6 +1,10 @@
 package nl.novi.techiteasy1121.dto;
 
 import lombok.Data;
+import nl.novi.techiteasy1121.models.Television;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 public class WallBracketDto {
@@ -10,6 +14,7 @@ public class WallBracketDto {
     private Boolean adjustable;
     private String name;
     private Double price;
+//    Set<Television> televisions = new HashSet<>();
 
     public WallBracketDto() {
     }
@@ -61,4 +66,13 @@ public class WallBracketDto {
     public void setPrice( Double price ) {
         this.price = price;
     }
+
+
+//    public Set<Television> getTelevisions() {
+//        return televisions;
+//    }
+
+//    public void setTelevisions(Set<Television> televisions) {
+//        this.televisions = televisions;
+//    }
 }

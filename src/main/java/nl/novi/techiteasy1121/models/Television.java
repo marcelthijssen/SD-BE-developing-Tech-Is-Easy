@@ -26,8 +26,9 @@ public class Television {
             name = "television_wallbrackets",
             joinColumns = @JoinColumn(name = "wallbracket_id"),
             inverseJoinColumns = @JoinColumn(name = "television_id"))
-    Set<Television> televisions = new HashSet<>();
+    Set<WallBracket> wallBrackets = new HashSet<>();
 //    private WallBracket wallBracket;
+
 
     @ManyToOne
     @JsonIgnore
@@ -210,10 +211,13 @@ public class Television {
         return ciModule;
     }
 
-//    public void setWallBracket( WallBracket wallBracket ){
-//        this.wallBracket = wallBracket;
+//
+//    public Set<WallBracket> getWallBracket() {
+//        return wallBrackets;
 //    }
-//    public WallBracket getWallBracket() {
-//        return wallBracket;
+//
+//    public void setWallBracket( Set<WallBracket> wallBrackets ) {
+//        this.wallBrackets = wallBrackets;
 //    }
+
 }

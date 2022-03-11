@@ -3,10 +3,13 @@ package nl.novi.techiteasy1121.dto;
 import lombok.Data;
 import nl.novi.techiteasy1121.models.CiModule;
 import nl.novi.techiteasy1121.models.Remotecontroller;
+import nl.novi.techiteasy1121.models.Television;
 import nl.novi.techiteasy1121.models.WallBracket;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Data
@@ -27,28 +30,28 @@ public class TelevisionDto {
     private Double availableSize;
     private Double refreshRate;
 
-//    @NotBlank(message = "screentype not valid")
+    //    @NotBlank(message = "screentype not valid")
     private String screenType;
 
-//    @NotBlank(message = "Screen quality not valid")
+    //    @NotBlank(message = "Screen quality not valid")
     private String screenQuality;
 
-//    @NotNull(message = "smartTv no entry")
+    //    @NotNull(message = "smartTv no entry")
     private Boolean smartTv;
 
-//    @NotNull(message = "wifi no entry")
+    //    @NotNull(message = "wifi no entry")
     private Boolean wifi;
 
-//    @NotNull(message = "voiceControl no entry")
+    //    @NotNull(message = "voiceControl no entry")
     private Boolean voiceControl;
 
-//    @NotNull(message = "hdr no entry")
+    //    @NotNull(message = "hdr no entry")
     private Boolean hdr;
 
-//    @NotNull(message = "bluetooth no entry")
+    //    @NotNull(message = "bluetooth no entry")
     private Boolean bluetooth;
 
-//    @NotNull(message = "ambiLight no entry")
+    //    @NotNull(message = "ambiLight no entry")
     private Boolean ambiLight;
 
     private Integer originalStock;
@@ -56,14 +59,16 @@ public class TelevisionDto {
 
     private CiModule ciModule;
     private Remotecontroller remotecontroller;
-    private WallBracket wallBracket;
+//    private WallBracket wallBracket;
+//    Set<WallBracket> wallBrackets = new HashSet<>();
 
     // Een default constructor
-    public TelevisionDto(  ) { }
+    public TelevisionDto() {
+    }
 
 
-    // Een constructor met alle gevraagde variable
-   public TelevisionDto(
+    // Een constructor met alles
+    public TelevisionDto(
             Long id,
             String type,
             String brand,
@@ -82,8 +87,9 @@ public class TelevisionDto {
             Integer originalStock,
             Integer sold,
             CiModule ciModule,
-            Remotecontroller remotecontroller,
-            WallBracket wallBracket ) {
+            Remotecontroller remotecontroller
+//            WallBracket wallBracket
+    ) {
         this.id = id;
         this.type = type;
         this.brand = brand;
@@ -103,6 +109,7 @@ public class TelevisionDto {
         this.sold = sold;
         this.ciModule = ciModule;
         this.remotecontroller = remotecontroller;
+//        this.wallBracket = wallBracket;
     }
 
 
@@ -261,10 +268,19 @@ public class TelevisionDto {
     }
 
 
-    public void setWallBracket( WallBracket wallBracket ){
-        this.wallBracket = wallBracket;
-    }
-    public WallBracket getWallBracket() {
-        return wallBracket;
-    }
+//    public void setWallBracket( WallBracket wallBracket ) {
+//        this.wallBracket = wallBracket;
+//    }
+
+//    public WallBracket getWallBracket() {
+//        return wallBracket;
+//    }
+//
+//    public Set<WallBracket> getWallBrackets() {
+//        return wallBrackets;
+//    }
+//
+//    public void setWallBrackets( Set<WallBracket> wallBrackets ) {
+//        this.wallBrackets = wallBrackets;
+//    }
 }

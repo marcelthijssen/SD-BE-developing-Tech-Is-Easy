@@ -85,9 +85,9 @@ public class TelevisionController {
         return new ResponseEntity<>( "CiModule gekoppeld aan tv", HttpStatus.ACCEPTED );
     }
 
-    @PutMapping("/televisions/wb/{tvid}/{wbid}")
-    public ResponseEntity<Object> assignWallBracketToTelevision( @PathVariable("tvid") Long id, @PathVariable("wbid") Long wbid ) {
-        tvService.assignWallBracketToTelevision( id, wbid );
-        return new ResponseEntity<>( "WallBracketgekoppeld aan tv", HttpStatus.ACCEPTED );
-    }
+//    @PutMapping("/televisions/wb/{tvid}/{wbid}")
+//    public ResponseEntity<Object> assignWallBracketToTelevision( @PathVariable("tvid") Long id, @PathVariable("wbid") Long wbid ) {
+//        tvService.assignWallBracketToTelevision( id, wbid );
+//        return new ResponseEntity<>( "WallBracketgekoppeld aan tv", HttpStatus.ACCEPTED );
+//    }
 }
