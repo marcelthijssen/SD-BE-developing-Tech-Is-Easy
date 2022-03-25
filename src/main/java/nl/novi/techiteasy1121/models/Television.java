@@ -18,30 +18,7 @@ public class Television {
     @Id
     @GeneratedValue
     @Column(unique = true, nullable = false)
-    Long id;
-
-    @ManyToMany
-    @JoinTable(
-            name = "television_wallbrackets",
-            joinColumns = @JoinColumn(name = "wallbracket_id"),
-            inverseJoinColumns = @JoinColumn(name = "television_id"))
-    private Set<WallBracket> wallBrackets = new HashSet<>();
-
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(
-            name = "ci_module_id",
-            referencedColumnName = "id",
-            nullable = true)
-    @JsonManagedReference
-    private CiModule ciModule;
-
-    @OneToOne
-    @JsonIgnore
-    @JoinColumn(
-            name = "remotecontroller_id",
-            referencedColumnName = "id")
-    private Remotecontroller remotecontroller;
+    private Long id;
 
     private String type;
     private String brand;
@@ -59,6 +36,29 @@ public class Television {
     private Boolean ambiLight;
     private Integer originalStock;
     private Integer sold;
+
+    @OneToOne
+    @JsonIgnore
+    @JoinColumn(
+            name = "remotecontroller_id",
+            referencedColumnName = "id")
+    private Remotecontroller remotecontroller;
+
+    @ManyToMany
+    @JoinTable(
+            name = "television_wallbrackets",
+            joinColumns = @JoinColumn(name = "wallbracket_id"),
+            inverseJoinColumns = @JoinColumn(name = "television_id"))
+    private Set<WallBracket> wallBrackets = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(
+            name = "ci_module_id",
+            referencedColumnName = "id",
+            nullable = true)
+    @JsonManagedReference
+    private CiModule ciModule;
 
     public Long getId() {
         return id;
@@ -196,7 +196,7 @@ public class Television {
         this.sold = sold;
     }
 
-
+// remotecontroller
     public Remotecontroller getRemotecontroller() {
         return remotecontroller;
     }
@@ -204,7 +204,7 @@ public class Television {
     public void setRemotecontroller( Remotecontroller remotecontroller ) {
         this.remotecontroller = remotecontroller;
     }
-
+// CiModule
     public void setCiModule( CiModule ciModule ) {
         this.ciModule = ciModule;
     }
@@ -213,13 +213,10 @@ public class Television {
         return ciModule;
     }
 
-
+//WallBracket
     public Set<WallBracket> getWallBrackets() {
         return wallBrackets;
     }
-//
-//    public void setWallBracket( Set<WallBracket> wallBrackets ) {
-//        this.wallBrackets = wallBrackets;
-//    }
+
 
 }

@@ -3,7 +3,6 @@ package nl.novi.techiteasy1121.service;
 import nl.novi.techiteasy1121.dto.TelevisionDto;
 import nl.novi.techiteasy1121.exceptions.RecordNotFoundException;
 import nl.novi.techiteasy1121.models.Television;
-import nl.novi.techiteasy1121.models.WallBracket;
 import nl.novi.techiteasy1121.repositories.CiModuleRepository;
 import nl.novi.techiteasy1121.repositories.RemotecontrollerRepository;
 import nl.novi.techiteasy1121.repositories.TelevisionRepository;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class TelevisionServiceImpl implements TelevisionService {
@@ -100,25 +98,25 @@ public class TelevisionServiceImpl implements TelevisionService {
 
     @Override
     public Television addTelevision( TelevisionDto televisionDto ) {
-        Television t = new Television();
-        t.setId( televisionDto.getId() );
-        t.setType( televisionDto.getType() );
-        t.setBrand( televisionDto.getBrand() );
-        t.setName( televisionDto.getName() );
-        t.setPrice( televisionDto.getPrice() );
-        t.setAvailableSize( televisionDto.getAvailableSize() );
-        t.setRefreshRate( televisionDto.getRefreshRate() );
-        t.setScreenType( televisionDto.getScreenType() );
-        t.setScreenQuality( televisionDto.getScreenQuality() );
-        t.setSmartTv( televisionDto.getSmartTv() );
-        t.setWifi( televisionDto.getWifi() );
-        t.setVoiceControl( televisionDto.getVoiceControl() );
-        t.setHdr( televisionDto.getHdr() );
-        t.setBluetooth( televisionDto.getBluetooth() );
-        t.setAmbiLight( televisionDto.getAmbiLight() );
-        t.setOriginalStock( televisionDto.getOriginalStock() );
-        t.setSold( televisionDto.getSold() );
-        return this.tvRepository.save( t );
+        Television tv = new Television();
+        tv.setId( televisionDto.getId() );
+        tv.setType( televisionDto.getType() );
+        tv.setBrand( televisionDto.getBrand() );
+        tv.setName( televisionDto.getName() );
+        tv.setPrice( televisionDto.getPrice() );
+        tv.setAvailableSize( televisionDto.getAvailableSize() );
+        tv.setRefreshRate( televisionDto.getRefreshRate() );
+        tv.setScreenType( televisionDto.getScreenType() );
+        tv.setScreenQuality( televisionDto.getScreenQuality() );
+        tv.setSmartTv( televisionDto.getSmartTv() );
+        tv.setWifi( televisionDto.getWifi() );
+        tv.setVoiceControl( televisionDto.getVoiceControl() );
+        tv.setHdr( televisionDto.getHdr() );
+        tv.setBluetooth( televisionDto.getBluetooth() );
+        tv.setAmbiLight( televisionDto.getAmbiLight() );
+        tv.setOriginalStock( televisionDto.getOriginalStock() );
+        tv.setSold( televisionDto.getSold() );
+        return this.tvRepository.save( tv );
     }
 
     @Override

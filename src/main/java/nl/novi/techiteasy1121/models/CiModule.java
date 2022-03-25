@@ -1,6 +1,5 @@
 package nl.novi.techiteasy1121.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
@@ -16,9 +15,7 @@ public class CiModule {
     @Id
     @GeneratedValue
     @Column(unique = true, nullable = false)
-    Long id;
-
-
+    private Long id;
     private String name;
     private String type;
     private Double price;
@@ -28,10 +25,8 @@ public class CiModule {
     @OneToMany(mappedBy = "ciModule",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-//    @JsonBackReference
     @JsonIgnore
     private List<Television> televisions;
-
 
     public Long getId() {
         return id;

@@ -61,7 +61,7 @@ public class CiModuleController {
 
     }
 
-    @PutMapping("cimodules/{id}")
+    @PutMapping("/cimodules/{id}")
     public CiModuleDto updateCiModule(@PathVariable("id") Long id, @RequestBody CiModuleDto ciModule) {
 
         CiModuleDto dto = service.updateCiModule(id, ciModule);

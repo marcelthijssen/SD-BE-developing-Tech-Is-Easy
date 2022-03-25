@@ -84,7 +84,7 @@ public class RemotecontrollerServiceImpl implements RemotecontrollerService {
             rcRepository.save( rc );
             return dto;
         } else {
-            throw new RecordNotFoundException( "geen televisie gevonden" );
+            throw new RecordNotFoundException( "geen Remote controller gevonden" );
         }
     }
 

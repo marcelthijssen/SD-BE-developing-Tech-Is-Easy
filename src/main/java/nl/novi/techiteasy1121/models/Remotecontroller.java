@@ -12,6 +12,13 @@ public class Remotecontroller {
     @GeneratedValue
     @Column(unique = true, nullable = false)
     Long id;
+    private String compatibleWith;
+
+    private String batteryType;
+    private String name;
+    private String brand;
+    private Double price;
+    private Integer originalStock;
 
     @JsonIgnore
     @OneToOne(mappedBy="remotecontroller")
@@ -24,15 +31,6 @@ public class Remotecontroller {
     public void setTelevision( Television television ) {
         this.television = television;
     }
-//    @OneToMany(mappedBy="ciModule")
-//    private Television television;
-
-    private String compatibleWith;
-    private String batteryType;
-    private String name;
-    private String brand;
-    private Double price;
-    private Integer originalStock;
 
     public Long getId() {
         return id;

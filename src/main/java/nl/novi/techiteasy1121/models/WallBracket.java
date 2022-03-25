@@ -16,15 +16,14 @@ public class WallBracket {
     @Column(unique = true, nullable = false)
     Long id;
 
-    @JsonIgnore
-    @ManyToMany(
-            mappedBy = "wallBrackets")
-    private  Set<Television> televisions = new HashSet<>();
-
     private String size;
     private Boolean adjustable;
     private String name;
     private Double price;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "wallBrackets")
+    private  Set<Television> televisions = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -65,8 +64,6 @@ public class WallBracket {
     public void setPrice( Double price ) {
         this.price = price;
     }
-
-
 
     public Set<Television> getTelevisions() {
         return televisions;
