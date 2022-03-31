@@ -1,6 +1,5 @@
 package nl.novi.techiteasy1121.models;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;

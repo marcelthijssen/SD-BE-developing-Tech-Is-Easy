@@ -1,6 +1,5 @@
 package nl.novi.techiteasy1121.controllers;
 
-import nl.novi.techiteasy1121.dto.TelevisionDto;
 import nl.novi.techiteasy1121.dto.UserDto;
 import nl.novi.techiteasy1121.exceptions.RecordNotFoundException;
 import nl.novi.techiteasy1121.service.UserService;
@@ -30,9 +29,9 @@ public class UserController {
         return new ResponseEntity<>( lt, HttpStatus.OK );
     }
 
-    // changed <TelevisionDto> to <Object>
+    // changed <UserDto> to <Object>
     @GetMapping("/users/{id}")
-    public ResponseEntity<Object> getTelevisionById( @PathVariable(name = "id") Long id ) {
+    public ResponseEntity<Object> getUserById( @PathVariable(name = "id") Long id ) {
         UserDto tv = userService.getUserById( id );
         try {
             return ResponseEntity.ok( tv );
@@ -42,7 +41,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<Object> addTelevision( @Valid @RequestBody UserDto userDto, BindingResult br ) {
+    public ResponseEntity<Object> addUser( @Valid @RequestBody UserDto userDto, BindingResult br ) {
         if ( br.hasErrors() ) {
             StringBuilder sb = new StringBuilder();
             for ( FieldError fe : br.getFieldErrors() ) {
@@ -52,12 +51,12 @@ public class UserController {
             return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
         } else {
             userService.addUser( userDto );
-            return new ResponseEntity( "Televisie aangemaakt", HttpStatus.CREATED );
+            return new ResponseEntity( "User added", HttpStatus.CREATED );
         }
     }
 
     @DeleteMapping("/user/{id}")
-    public void deleteTelevisionById( @PathVariable("id") Long id ) {
+    public void deleteUserById( @PathVariable("id") Long id ) {
 
         userService.deleteUserById( id );
 

@@ -1,6 +1,5 @@
 package nl.novi.techiteasy1121.controllers;
 
-import nl.novi.techiteasy1121.dto.RemotecontrollerDto;
 import nl.novi.techiteasy1121.dto.TelevisionDto;
 import nl.novi.techiteasy1121.exceptions.RecordNotFoundException;
 import nl.novi.techiteasy1121.service.TelevisionService;
