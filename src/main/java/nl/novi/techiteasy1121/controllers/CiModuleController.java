@@ -31,9 +31,9 @@ public class CiModuleController {
 
     @GetMapping("/cimodules/{id}")
     public ResponseEntity<Object> getCiModuleById( @PathVariable(name = "id") Long id ) {
-        CiModuleDto tv = service.getCiModuleById( id );
+        CiModuleDto cm = service.getCiModuleById( id );
         try {
-            return ResponseEntity.ok(tv);
+            return ResponseEntity.ok(cm);
         } catch ( Exception ex ) {
             throw new RecordNotFoundException( "Not found" );
         }
@@ -55,10 +55,10 @@ public class CiModuleController {
     }
 
     @DeleteMapping("/cimodules/{id}")
-    public void deleteCiModuleById(@PathVariable("id") Long id) {
-
+    public ResponseEntity<Object> deleteCiModuleById(@PathVariable("id") Long id) {
         service.deleteCiModuleById(id);
 
+        return new ResponseEntity<Object>( "CiModule deleted", HttpStatus.OK);
     }
 
     @PutMapping("/cimodules/{id}")

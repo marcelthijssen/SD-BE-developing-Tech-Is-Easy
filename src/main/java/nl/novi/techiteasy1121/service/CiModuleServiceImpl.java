@@ -40,7 +40,7 @@ public class CiModuleServiceImpl implements CiModuleService {
             dto.setPrice( cm.getPrice() );
             return dto;
         } else {
-            throw new RecordNotFoundException( "Geen tv gevonden" );
+            throw new RecordNotFoundException( "No ciModule here" );
         }
     }
 
@@ -57,9 +57,11 @@ public class CiModuleServiceImpl implements CiModuleService {
 
     @Override
     public void deleteCiModuleById( Long id ) {
-
-        repository.deleteById( id );
-
+        if ( repository.findById( id ).isPresent() ) {
+            repository.deleteById( id );
+        } else {
+            throw new RecordNotFoundException( "Damn, this CiModule does not exist" );
+        }
     }
 
     @Override
@@ -76,7 +78,7 @@ public class CiModuleServiceImpl implements CiModuleService {
             repository.save( cm );
             return dto;
         } else {
-            throw new RecordNotFoundException( "geen televisie gevonden" );
+            throw new RecordNotFoundException( "Noi CiModule here, my dear" );
         }
     }
 }

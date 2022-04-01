@@ -45,14 +45,18 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeRequests()
+
+                .and().authorizeRequests()
                 .antMatchers( HttpMethod.POST, "/auth").permitAll()
-                .and()
-                .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
-                .addFilterBefore(new JwtRequestFilter(jwtService, userDetailsService()), UsernamePasswordAuthenticationFilter.class)
+                .antMatchers( HttpMethod.DELETE ).hasRole( "ADMIN" )
+                .antMatchers( HttpMethod.PUT ).hasRole( "ADMIN" )
+                .antMatchers( HttpMethod.POST ).hasRole( "ADMIN" )
+//                .antMatchers( HttpMethod.GET ).hasAnyRole( "USER", "ADMIN" )
+                .antMatchers(  "/**").anonymous()
+
+                .and().authorizeRequests().anyRequest().authenticated()
+
+                .and().addFilterBefore(new JwtRequestFilter(jwtService, userDetailsService()), UsernamePasswordAuthenticationFilter.class)
                 .csrf().disable();
     }
 

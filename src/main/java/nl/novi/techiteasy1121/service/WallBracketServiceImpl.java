@@ -43,7 +43,7 @@ public class WallBracketServiceImpl implements WallBracketService {
 
             return dto;
         } else {
-            throw new RecordNotFoundException( "Geen tv gevonden" );
+            throw new RecordNotFoundException( "Geen wb gevonden" );
         }
     }
 
