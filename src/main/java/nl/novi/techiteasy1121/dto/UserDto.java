@@ -1,6 +1,7 @@
 package nl.novi.techiteasy1121.dto;
 
 import lombok.Data;
+import nl.novi.techiteasy1121.models.User;
 
 @Data
 public class UserDto {
@@ -19,6 +20,28 @@ public class UserDto {
         this.password = password;
         this.role = role;
     }
+//
+//    public UserDto userToUserDto( User user){
+//        UserDto userDto = new UserDto();
+//        userDto.setId( user.getId());
+//        userDto.setUsername( user.getUsername() );
+//        userDto.setPassword( user.getPassword() );
+//        userDto.setRole( user.getRole() );
+//
+//        return userDto;
+//    }
+//
+//
+//    public User userDtoToUser( UserDto userDto){
+//        User user = new User();
+//        user.setId( userDto.getId());
+//        user.setUsername( userDto.getUsername() );
+//        user.setPassword( userDto.getPassword() );
+//        user.setRole( userDto.getRole() );
+//
+//        return user;
+//    }
+
 
     public long getId() {
         return id;

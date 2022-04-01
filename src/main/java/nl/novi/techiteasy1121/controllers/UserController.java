@@ -32,9 +32,9 @@ public class UserController {
     // changed <UserDto> to <Object>
     @GetMapping("/users/{id}")
     public ResponseEntity<Object> getUserById( @PathVariable(name = "id") Long id ) {
-        UserDto tv = userService.getUserById( id );
+        UserDto userDto = userService.getUserById( id );
         try {
-            return ResponseEntity.ok( tv );
+            return ResponseEntity.ok( userDto );
         } catch ( Exception ex ) {
             throw new RecordNotFoundException( "Not found" );
         }

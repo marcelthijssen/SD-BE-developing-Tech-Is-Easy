@@ -18,6 +18,7 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
+
     @Override
     public List<UserDto> getAllUsers() {
         List<User> userList = this.userRepository.findAll();
@@ -27,6 +28,7 @@ public class UserServiceImpl implements UserService {
             UserDto dto = new UserDto();
             dto.setId( u.getId() );
             dto.setUsername( u.getUsername() );
+            dto.setPassword( u.getPassword() );
             dto.setRole( u.getRole() );
             userDtoList.add( dto );
         }
@@ -40,12 +42,15 @@ public class UserServiceImpl implements UserService {
             User u = userRepository.findById( id ).get();
             dto.setId( u.getId() );
             dto.setUsername( u.getUsername() );
+            dto.setPassword( u.getPassword() );
             dto.setRole( u.getRole() );
             return dto;
         } else {
-            throw new RecordNotFoundException( "User not found" );
+            throw new RecordNotFoundException( "User not found");
         }
     }
+
+
 
     @Override
     public User addUser( UserDto userDto ) {
